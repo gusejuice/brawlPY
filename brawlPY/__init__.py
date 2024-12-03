@@ -1,1 +1,1 @@
-from .brawlPY import APIClient, Player, Club, AuthorizationError
+from .brawlPY import *

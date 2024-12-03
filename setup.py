@@ -6,7 +6,7 @@ setup(
     author="gusejuice",
     description="Library for accessing data from Brawl Stars API",
     long_description=open("README.md").read(),
-    #url="https://github.com/",
+    url="https://github.com/gusejuice/brawlPY",
     packages=find_packages(),
     install_requires=["requests", 
                       "python-dotenv"],
