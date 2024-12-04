@@ -89,7 +89,7 @@ class Player:
     def getBestTimeAsBigBrawler(self) -> int:
         return self.__json["bestTimeAsBigBrawler"]
 
-    def getNameColor(self): # returns a color code of the user's name color
+    def getNameColor(self) -> str: # returns a color code of the user's name color
         try:
             return self.__json["nameColor"]
         except KeyError:
@@ -99,19 +99,19 @@ class Player:
         def __init__(self, json):
             self.__json = json
         
-        def getId(self): # returns the ID of the brawler
+        def getId(self) -> int: # returns the ID of the brawler
             return self.__json["id"]
         
-        def getPower(self):
+        def getPower(self) -> int:
             return self.__json["power"]
         
-        def getRank(self): # returns an integer of the current rank of the brawler
+        def getRank(self) -> int: # returns an integer of the current rank of the brawler
             return self.__json["rank"]
         
-        def getTrophies(self): # returns an integer of the current total trophies of the brawler
+        def getTrophies(self) -> int: # returns an integer of the current total trophies of the brawler
             return self.__json["trophies"]
         
-        def getHighestTrophies(self): # returns an integer of the highest amount of trophies of the brawler
+        def getHighestTrophies(self) -> int: # returns an integer of the highest amount of trophies of the brawler
             return self.__json["highestTrophies"]
         
         def getGears(self): # returns a dictionary with the gears the player has for the brawler
@@ -126,24 +126,43 @@ class Player:
 class Club:
     def __init__(self, tag: str, client: APIClient):
         self.__json = client.get_club_info(tag)
+
+        # creates class for all members of the club
+        self.member = {member["name"]: self.Member(member) for member in self.__json["members"]}
     
-    def getName(self): # returns a string of the club name
+    def getName(self) -> str: # returns a string of the club name
         return self.__json["name"]
     
-    def getDescription(self): # returns a string of the club description
+    def getDescription(self) -> str: # returns a string of the club description
         return self.__json["description"]
     
-    def getTrophies(self): # returns the total trophies of the club
+    def getTrophies(self) -> int: # returns the total trophies of the club
         return self.__json["trophies"]
     
-    def getRequiredTrophies(self): # returns the required amount of trophies to get in the club
+    def getRequiredTrophies(self) -> int: # returns the required amount of trophies to get in the club
         return self.__json["requiredTrophies"]
     
-    def getMembers(self): # returns a list of the players in the club
-        return self.__json["members"]
+    def getMemberList(self): # returns a list of the players in the club
+        return [member["name"] for member in self.__json["members"]]
     
-    def getType(self):
+    def getType(self) -> str:
         return self.__json["type"]
     
-    def getBadgeId(self):
+    def getBadgeId(self) -> int:
         return self.__json["badgeId"]
+    
+    class Member:
+        def __init__(self, json):
+            self.__json = json
+        
+        def getTag(self) -> str:
+            return self.__json["tag"]
+        
+        def getNameColor(self) -> str:
+            return self.__json["nameColor"]
+        
+        def getRole(self) -> str:
+            return self.__json["role"]
+        
+        def getTrophies(self) -> int:
+            return self.__json["trophies"]
