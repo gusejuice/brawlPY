@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="brawlPY", 
+    name="brawlPY-2024", 
     version="0.0.1",
     author="gusejuice",
     description="Library for accessing data from Brawl Stars API",
